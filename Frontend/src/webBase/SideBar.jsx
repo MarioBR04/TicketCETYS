@@ -1,31 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
 import {
-  HiOutlineHome,
-  HiOutlineShoppingCart,
-  HiOutlineClipboardList,
-  HiOutlineChartBar,
-  HiOutlineLogout,
+  HiOutlineLocationMarker,
+  HiOutlinePlusCircle,
   HiUserCircle,
-  HiOutlineArchive,
+  HiQuestionMarkCircle,
 } from "react-icons/hi";
 import "./SideBar.css";
+import { GiEasterEgg } from "react-icons/gi";
 
 function Sidebar() {
   const location = useLocation();
 
   const navLinks = [
-    { to: "/", label: "Lugares", icon: <HiOutlineArchive /> },
+    { to: "/", label: "Lugares", icon: <HiOutlineLocationMarker /> },
     {
       to: "/misreservas",
       label: "Mis Reservaciones",
-      icon: <HiOutlineChartBar />,
+      icon: <GiEasterEgg />,
     },
     {
       to: "/nuevareserva",
       label: "Nueva Reservacion",
-      icon: <HiOutlineArchive />,
+      icon: <HiOutlinePlusCircle />,
     },
-    { to: "/ayuda", label: "Ayuda", icon: <HiOutlineShoppingCart /> },
+    { to: "/ayuda", label: "Ayuda", icon: <HiQuestionMarkCircle /> },
   ];
 
   const logOut = () => {
@@ -63,7 +61,7 @@ function Sidebar() {
         <div className="user-info">
           <HiUserCircle className="user-icon" />
           <p className="user-name">
-            {localStorage.getItem("user") || "Usuario"}
+            {JSON.parse(localStorage.getItem("user")).nombre || "Usuario"}
           </p>
           <button className="logOut" onClick={logOut}>
             <span className="logout-text">Cerrar Sesión</span>
