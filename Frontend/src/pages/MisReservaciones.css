@@ -1,0 +1,225 @@
+:root {
+  --primary-bg-color: #f7f7f7;
+  --card-bg-color: #fff;
+  --text-color-dark: #333;
+  --text-color-medium: #444;
+  --text-color-light: #666;
+  --green-button-color: #4caf50;
+  --green-button-hover: #388e3c;
+  --red-button-color: #f44336;
+  --red-button-hover: #d32f2f;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --focus-shadow-color: rgba(0, 123, 255, 0.4);
+}
+
+body {
+  font-family: 'Inter', 'Funnel Sans', sans-serif;
+  background-color: var(--primary-bg-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--text-color-dark);
+}
+
+.mis-reservaciones {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 6px 12px var(--shadow-color);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.mis-reservaciones h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.25rem;
+  color: var(--text-color-dark);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.tarjetas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  grid-auto-rows: 1fr;
+}
+
+.tarjeta {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.tarjeta-imagen {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta:hover .tarjeta-imagen {
+  transform: scale(1.05);
+}
+
+.tarjeta-info {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tarjeta-info h2 {
+  font-size: 1.5rem;
+  color: var(--text-color-medium);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.tarjeta-info p {
+  font-size: 0.875rem;
+  color: var(--text-color-light);
+  margin: 8px 0;
+  flex-grow: 1;
+}
+
+.tarjeta-botones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.editar-btn,
+.eliminar-btn {
+  flex-grow: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.editar-btn {
+  background-color: var(--green-button-color);
+  color: #fff;
+}
+
+.eliminar-btn {
+  background-color: var(--red-button-color);
+  color: #fff;
+}
+
+.editar-btn:hover {
+  background-color: var(--green-button-hover);
+  transform: scale(1.05);
+}
+
+.eliminar-btn:hover {
+  background-color: var(--red-button-hover);
+  transform: scale(1.05);
+}
+
+.editar-btn:focus,
+.eliminar-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-shadow-color);
+}
+
+.imagen img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .mis-reservaciones {
+    padding: 20px 10px;
+  }
+
+  .tarjetas-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .mis-reservaciones h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Estilo para el popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-botones {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.popup-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup-btn.confirmar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.popup-btn.cancelar {
+  background-color: #f44336;
+  color: white;
+}
+
+.popup-btn:hover {
+  transform: scale(1.05);
+}
+
+.popup-btn:focus {
+  outline: none;
+}
