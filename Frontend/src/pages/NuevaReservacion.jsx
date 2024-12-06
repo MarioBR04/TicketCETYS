@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { SalaCard } from "../components/SalaCard";
 import { supabase } from "../supabaseClient";
-
+import { CalendarioReservas } from "../components/CalendarioReservas";
 export const NuevaReservacion = () => {
   const [salas, setSalas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,9 +44,7 @@ export const NuevaReservacion = () => {
   return (
     <div className="flex flex-col screen bg-gray-50">
       <div className="flex flex-col w-64 bg-white shadow-md p-6 rounded-[50px] text-center">
-        <h2 className="text-xl font-bold  text-gray-800">
-          Salas disponibles
-        </h2>
+        <h2 className="text-xl font-bold  text-gray-800">Salas disponibles</h2>
         {/* Contenido adicional de sidebar */}
       </div>
       <div className="flex-1 overflow-x-auto p-6 flex space-x-4">
