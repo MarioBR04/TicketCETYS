@@ -5,74 +5,32 @@ import { supabase } from '../supabaseClient';
 import { isDateValid, isValidReservationTime } from '../utils/validationUtils';
 
 export const ReservationModal = ({ sala, onClose, checkAvailability }) => {
+
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [error, setError] = useState(null);
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    // Verificar usuario al montar el componente
-    const storedUserId = localStorage.getItem("matricula");
-    console.log("Usuario recuperado:", storedUserId);
-    setUserId(storedUserId);
-  }, []);
-
+  const [error, setError] = useState('');
+  const userID = JSON.parse(localStorage.getItem('user')).matricula;
   const handleReserve = async () => {
-    // Asegurarse de que userId está definido
-    const currentUserId = localStorage.getItem("matricula");
-    
-    if (!currentUserId) {
-      setError("Inicia sesión para reservar");
-      return;
-    }
-
-    const reservationDate = new Date(date);
-    if (!isDateValid(reservationDate)) {
-      setError("No puedes reservar en fechas pasadas");
-      return;
-    }
-
-    if (!isValidReservationTime(startTime, endTime)) {
-      setError("Horario de reserva inválido");
-      return;
-    }
-
-    const isAvailable = await checkAvailability(sala.id_sala, reservationDate);
-    if (!isAvailable) {
-      setError("La sala ya está reservada en ese horario");
-      return;
-    }
-
     try {
-      const { data, error } = await supabase
-        .from('reservaciones')
-        .insert({
-          id_sala: sala.id_sala,
-          fecha_reserva: date,
-          hora_inicio: startTime,
-          hora_fin: endTime,
-          matricula: currentUserId
-        });
+      const {data, error} = await supabase
+      .from('reservas')
+      .insert({
+        matricula_usuario: userID,
+        id_sala: sala.id_sala,
+        fecha_reserva: date,
+        hora_inicio: startTime,
+        hora_fin: endTime,
+      })
 
       if (error) throw error;
-
-      alert("Reservación realizada con éxito");
+      alert('Reservación exitosa');
       onClose();
-    } catch (err) {
-      setError("Error al realizar la reservación");
-      console.error(err);
-  };
-  
-  ReservationModal.propTypes = {
-    sala: PropTypes.shape({
-      id_sala: PropTypes.number.isRequired,
-      nombre_sala: PropTypes.string.isRequired,
-    }).isRequired,
-    onClose: PropTypes.func.isRequired,
-    checkAvailability: PropTypes.func.isRequired,
-  };
-  };
+    } catch (error) {
+      setError(error.message);
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div 
@@ -129,7 +87,6 @@ export const ReservationModal = ({ sala, onClose, checkAvailability }) => {
             <button 
               onClick={handleReserve} 
               className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors"
-              // Elimina el atributo disabled
             >
               Reservar
             </button>
@@ -144,4 +101,12 @@ export const ReservationModal = ({ sala, onClose, checkAvailability }) => {
       </div>
     </div>
   );
+};
+ReservationModal.propTypes = {
+  sala: PropTypes.shape({
+    nombre_sala: PropTypes.string.isRequired,
+    id_sala: PropTypes.number.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+  checkAvailability: PropTypes.func.isRequired,
 };

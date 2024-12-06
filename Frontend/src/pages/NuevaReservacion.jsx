@@ -44,7 +44,7 @@ export const NuevaReservacion = () => {
   return (
     <div className="flex flex-col screen bg-gray-50">
       <div className="flex flex-col w-64 bg-white shadow-md p-6 rounded-[50px] text-center">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">
+        <h2 className="text-xl font-bold  text-gray-800">
           Salas disponibles
         </h2>
         {/* Contenido adicional de sidebar */}
