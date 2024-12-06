@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import './MisReservaciones.css';
-import { supabase } from '../supabaseClient';
+import React, { useState, useEffect } from "react";
+import "./MisReservaciones.css";
+import { supabase } from "../supabaseClient";
 
 const MisReservaciones = () => {
   const [reservaciones, setReservaciones] = useState([]);
@@ -9,20 +9,29 @@ const MisReservaciones = () => {
 
   const fetchReservaciones = async () => {
     try {
-      const { data, error } = await supabase.from('reservas').select(`
+      const { data, error } = await supabase
+        .from("reservas")
+        .select(
+          `
           id_reserva,
           matricula_usuario,
           id_sala,
           fecha_reserva,
           hora_inicio,
           hora_fin,
-          salas(imagen_sala, nombre_sala)
-        `);
+          salas(imagen_sala, nombre_sala),
+          usuarios(nombre)
+        `
+        )
+        .eq(
+          "matricula_usuario",
+          JSON.parse(localStorage.getItem("user")).matricula
+        );
 
       if (error) throw error;
       setReservaciones(data);
     } catch (error) {
-      console.error('Error al obtener las reservaciones:', error.message);
+      console.error("Error al obtener las reservaciones:", error.message);
     }
   };
 
@@ -38,12 +47,12 @@ const MisReservaciones = () => {
   const confirmarEliminacion = async () => {
     try {
       const { error } = await supabase
-        .from('reservas')
+        .from("reservas")
         .delete()
-        .eq('id_reserva', reservaToDelete);
+        .eq("id_reserva", reservaToDelete);
 
       if (error) {
-        alert('Error al eliminar la reservación');
+        alert("Error al eliminar la reservación");
         console.error(error);
       } else {
         setReservaciones((prevReservaciones) =>
@@ -53,7 +62,7 @@ const MisReservaciones = () => {
         );
       }
     } catch (error) {
-      console.error('Error al eliminar la reservación:', error.message);
+      console.error("Error al eliminar la reservación:", error.message);
     } finally {
       setShowPopup(false); // Cerrar el popup
     }
@@ -77,7 +86,7 @@ const MisReservaciones = () => {
                 />
               </div>
               <h2>Reserva #{reservacion.id_reserva}</h2>
-              <p>Usuario: {reservacion.matricula_usuario}</p>
+              <p>Usuario: {reservacion.usuarios.nombre}</p>
               <p>Sala: {reservacion.salas.nombre_sala}</p>
               <p>Fecha: {reservacion.fecha_reserva}</p>
               <p>Hora de inicio: {reservacion.hora_inicio}</p>

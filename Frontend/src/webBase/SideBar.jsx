@@ -4,6 +4,7 @@ import {
   HiOutlinePlusCircle,
   HiUserCircle,
   HiQuestionMarkCircle,
+  HiMap,
 } from "react-icons/hi";
 import "./SideBar.css";
 import { GiEasterEgg } from "react-icons/gi";
@@ -13,6 +14,8 @@ function Sidebar() {
 
   const navLinks = [
     { to: "/", label: "Lugares", icon: <HiOutlineLocationMarker /> },
+    { to: "/mapa", label: "Mapa", icon: <HiMap /> },
+
     {
       to: "/misreservas",
       label: "Mis Reservaciones",
@@ -39,7 +42,7 @@ function Sidebar() {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo-cetys.png/755px-Logo-cetys.png"
           alt="Logo"
         />
-        <span className="app-name">Ticket</span>
+        <span className="app-name">TicketCETYS</span>
       </div>
       <div className="sidebar-nav">
         <nav>
@@ -59,7 +62,6 @@ function Sidebar() {
       </div>
       <div className="sidebar-footer">
         <div className="user-info">
-          <HiUserCircle className="user-icon" />
           <p className="user-name">
             {JSON.parse(localStorage.getItem("user")).nombre || "Usuario"}
           </p>

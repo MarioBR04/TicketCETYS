@@ -3,16 +3,31 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f7f7f7;
+}
+.background {
+  position: fixed; /* Asegura que la imagen se mantenga fija */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100%; /* Ocupa toda la altura */
+  background-size: cover; /* Ajusta para cubrir el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+  filter: blur(5px); /* Aplica el desenfoque */
+  z-index: -1; /* Coloca la imagen detrás de otros elementos */
+  background-image: url("https://i.ytimg.com/vi/Eg1RH45WYHI/maxresdefault.jpg");
 }
 
 .auth-card {
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 300px;
   text-align: center;
+  align-items: center;
 }
 
 .auth-title {
@@ -22,7 +37,7 @@
 }
 
 .auth-logo {
-  width: 50px;
+  width: 100px;
   margin-bottom: 1rem;
 }
 

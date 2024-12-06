@@ -6,6 +6,7 @@ import NuevaReserva from "./pages/NuevaReservacion";
 import MisReservas from "./pages/MisReservaciones";
 import Ayuda from "./pages/Ayuda";
 import Login from "./pages/Login";
+import Mapa from "./pages/Mapa";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ function App() {
           <div className="body">
             <Routes>
               <Route path="/" element={<Lugares />} />
+              <Route path="/mapa" element={<Mapa />} />
               <Route path="/nuevareserva" element={<NuevaReserva />} />
               <Route path="/misreservas" element={<MisReservas />} />
               <Route path="/ayuda" element={<Ayuda />} />
