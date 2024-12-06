@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { createClient } from "@supabase/supabase-js";
 import "./Login.css"; // Archivo CSS para estilos
-
-const supabase = createClient(
-  "https://tfkgssvsqrlybxxjzwxx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRma2dzc3ZzcXJseWJ4eGp6d3h4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzNzM2NDIsImV4cCI6MjA0ODk0OTY0Mn0.z4f4u68nZRuelSi_2yIVQZERjKjyIivtgHdO53OjPkk"
-);
+import { supabase } from "../supabaseClient";
 
 function Login({ setUser }) {
   const [matricula, setMatricula] = useState("");
@@ -56,13 +52,14 @@ function Login({ setUser }) {
 
   return (
     <div className="auth-container">
+      <div className="background"></div>
       <div className="auth-card">
-        <h1 className="auth-title">Ticket CETYS</h1>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo-cetys.png/755px-Logo-cetys.png"
           alt="Logo"
           className="auth-logo"
         />
+        <h1 className="auth-title">Ticket CETYS</h1>
         {isLogin ? (
           <>
             <form className="auth-form" onSubmit={handleLogin}>
@@ -87,7 +84,7 @@ function Login({ setUser }) {
                 />
               </div>
               <button className="auth-button" type="submit">
-                {"Login"}
+                {isLogin ? "Iniciar Sesión" : "Registrarse"}
               </button>
             </form>
             <p className="auth-footer">
@@ -134,7 +131,7 @@ function Login({ setUser }) {
                 />
               </div>
               <button className="auth-button" type="submit">
-                {registerLoading ? "Loading..." : "Register"}
+                Registrarse
               </button>
             </form>
             <p className="auth-footer">
@@ -143,9 +140,6 @@ function Login({ setUser }) {
                 Iniciar Sesión
               </span>
             </p>
-            {registerError && (
-              <p className="auth-error">{registerError.message}</p>
-            )}
           </>
         )}
       </div>

@@ -1,4 +1,3 @@
-// src/utils/validationUtils.js
 export const isValidReservationTime = (startTime, endTime) => {
   const start = new Date(`2023-01-01T${startTime}`);
   const end = new Date(`2023-01-01T${endTime}`);
